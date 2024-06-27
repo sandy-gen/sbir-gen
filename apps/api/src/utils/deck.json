@@ -1,0 +1,87 @@
+{
+  "replacements": {
+    "slide1": {
+      "fields": {
+        "{{product_name}}": "product_name",
+        "{{tagline}}": "tagline",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide2": {
+      "fields": {
+        "{{product_name}}": "product_name",
+        "{{company}}": "company",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide3": {
+      "fields": {
+        "{{project_overview}}": "project_overview",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide4": {
+      "fields": {
+        "{{project_technical_merit}}": "project_technical_merit",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide5": {
+      "fields": {
+        "{{project_team}}": "project_team",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide6": {
+      "fields": {
+        "{{project_commercialization}}": "project_commercialization",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide7": {
+      "fields": {
+        "{{technical_problem}}": "technical_problem",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide8": {
+      "fields": {
+        "{{significance}}": "significance",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide9": {
+      "fields": {
+        "{{solution}}": "solution",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    },
+    "slide10": {
+      "fields": {
+        "{{problem_quote}}": "problem_quote",
+        "{{problem_quote_author}}": "problem_quote_author",
+        "{{agency}}": "agency",
+        "{{program}}": "program",
+        "{{sbir_num}}": "sbir_num"
+      }
+    }
+  }
+}

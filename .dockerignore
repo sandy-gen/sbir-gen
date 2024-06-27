@@ -1,0 +1,14 @@
+**/node_modules
+**/build
+**/dist
+
+.dockerignore
+.env.*
+.git
+.github
+.gitignore
+.husky
+.idea
+.postman
+.vscode
+.prettierignore

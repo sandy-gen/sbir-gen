@@ -1,0 +1,5 @@
+[codespell]
+ignore-words = .github/wordlist.txt
+skip = ./node_modules,.github,./yarn.lock,./yarn-error.log,./ui/build/static,./api/dist,./packages/api/node_modules,./packages/ui/node_modules,./packages/components/dist./packages/ui/node_modules,./packages/server/bin,./packages/server/bin/logs,./packages/server/logs
+ignore-regex = \W([A-Z]{2,3})\W
+quiet = 2

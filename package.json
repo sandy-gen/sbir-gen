@@ -1,0 +1,58 @@
+{
+    "name": "sbir-gen",
+    "version": "0.0.1",
+    "private": true,
+    "homepage": "https://www.sbir-gen.ai",
+    "workspaces": [
+        "apps/api",
+        "apps/ui"
+    ],
+    "scripts": {
+        "build": "turbo run build",
+        "build-force": "turbo run build --force",
+        "prettify": "prettier --write .",
+        "dev": "turbo run dev --parallel",
+        "start": "cd packages/apps/server/bin && ./run start",
+        "clean": "npm exec -ws -- rimraf dist build",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+        "test": "turbo run test",
+        "lint": "eslint \"**/*.{js,jsx,ts,tsx,json,md}\"",
+        "lint-fix": "yarn lint --fix",
+        "quick": "pretty-quick --staged",
+        "postinstall": "husky install",
+        "migration:generate": "yarn typeorm migration:generate apps/server/src/database/migrations/postgres/Updates -p -d apps/server/dist/database/PostgresDataSource.js",
+        "migration:show": "yarn typeorm migration:show -d apps/server/dist/database/PostgresDataSource.js",
+        "codespell": "pip3 install codespell && codespell --config=./.github/.codespellrc --ignore-words=./.github/wordlist.txt"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,json,md}": "eslint --fix"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.24.7",
+        "@babel/core": "7.24.7",
+        "@babel/preset-typescript": "7.24.7",
+        "@types/express": "^4.17.13",
+        "@babel/plugin-syntax-flow@" : "^7.14.5",
+        "@typescript-eslint/typescript-estree": "^5.39.0",
+        "eslint": "^8.24.0",
+        "eslint-plugin-flowtype": "8.0.3",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-config-react-app": "^7.0.1",
+        "eslint-plugin-jsx-a11y": "^6.6.1",
+        "eslint-plugin-markdown": "^3.0.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-react": "^7.26.1",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-unused-imports": "^2.0.0",
+        "husky": "^8.0.1",
+        "lint-staged": "^13.0.3",
+        "prettier": "^2.7.1",
+        "pretty-quick": "^3.1.3",
+        "rimraf": "^3.0.2",
+        "turbo": "1.7.4",
+        "typescript": "^4.8.4"
+    },
+    "engines": {
+        "node": ">=18.15.0"
+    }
+}

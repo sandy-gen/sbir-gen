@@ -1,0 +1,14 @@
+version: '0.0.2'
+
+name: sbir-gen
+
+services:
+    app:
+        image: sbir-gen-app:latest
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        env_file:
+            - .env.dockerdb
+        ports:
+            - '8080:8080'
