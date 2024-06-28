@@ -253,7 +253,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ### Process Flow
-
+```
 graph TD
     A[Start] --> B[Receive Request]
     B --> C{Request Type}
@@ -273,7 +273,7 @@ graph TD
     L --> M
     M --> N[Send Response with Download Link]
     N --> O[End]
-
+```
 
 ### Routes
 /api/v1/llm/chat
