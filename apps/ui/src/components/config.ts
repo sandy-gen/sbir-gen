@@ -2,7 +2,7 @@
  * Components configuration
  */
 export const CONTENT_MAX_WIDTH = 1000;
-export const CONTENT_MIN_WIDTH = 320; // CONTENT_MAX_WIDTH - Sidebar width
+export const CONTENT_MIN_WIDTH = '96%'; // CONTENT_MAX_WIDTH - Sidebar width
 
 /**
  * AppAlert and AppSnackBarAlert components

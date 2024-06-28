@@ -14,7 +14,6 @@ const WelcomeView = () => {
       <Screen title={'Dashboard'} subtitle={'..'}>
         <Typography variant="h4"></Typography>
       </Screen>
-
     </AppView>
   );
 };

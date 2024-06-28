@@ -20,7 +20,6 @@ const Screen: React.FC<ScreenProps> = ({ title, subtitle, children }) => (
             {subtitle}
         </Typography>
         <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
-
             <Grid container spacing={2}>
                 {children}
             </Grid>
