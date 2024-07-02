@@ -36,6 +36,12 @@ export class Solicitation {
     solicitation_year: string;
 
     @Column({ nullable: true })
+    sbir_solicitation_link: string;
+
+    @Column({ nullable: true })
+    solicitation_agency_url: string;
+
+    @Column({ nullable: true })
     release_date: Date;
 
     @Column({ nullable: true })
@@ -67,4 +73,6 @@ export class Solicitation {
 
     @Column({ nullable: true })
     updatedBy: string;
+
+    solicitation: any;
 }

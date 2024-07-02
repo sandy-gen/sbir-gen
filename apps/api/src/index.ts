@@ -10,7 +10,7 @@ import { Server } from "socket.io";
 // import { Variable } from './database/entities/Variable'
 import { User } from "./database/entities/user/User";
 // import { PromptTemplate } from './database/entities/PromptTemplate'
-import { UserAuthenticationRequest } from "./dto/UserAuthenticationRequest";
+// import { UserAuthenticationRequest } from "./database/entities/user/UserAuthenticationRequest";
 import { UserProfile } from "./database/entities/user/UserProfile";
 import { Company } from "./database/entities/org/Company";
 import jwt from "jsonwebtoken";
@@ -22,6 +22,10 @@ import UserTopicService from "./services/user_topic_service";
 import { sanitizeMiddleware } from "./utils/XSS";
 import { generateDeck } from "./utils/deck_generator";
 import { UserInputData } from "./Interface";
+import { UserAuthenticationRequest } from "./dto/UserAuthenticationRequest";
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from '../swaggerConfig';
+
 const secretKey = "83477efdhdfhdiseiy";
 
 const initDb = process.env.INIT_USERS || false;
@@ -86,6 +90,7 @@ export class App {
         // Limit is needed to allow sending/receiving base64 encoded string
         this.app.use(express.json({ limit: "50mb" }));
         this.app.use(express.urlencoded({ limit: "50mb", extended: true }));
+        
 
         if (
             process.env.NUMBER_OF_PROXIES &&
@@ -104,7 +109,7 @@ export class App {
 
         // Add the sanitizeMiddleware to guard against XSS
         this.app.use(sanitizeMiddleware);
-
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
         const whitelistURLs = [
             "/api/v1/user/uaa/",
             "/api/v1/ip",
@@ -123,6 +128,24 @@ export class App {
             dest: `${path.join(__dirname, "..", "uploads")}/`,
         });
 
+/**
+ * @swagger
+ * /api/v1/ip:
+ *   get:
+ *     summary: Get the IP address
+ *     responses:
+ *       200:
+ *         description: Returns the IP address
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ip:
+ *                   type: string
+ *                 msg:
+ *                   type: string
+ */
         this.app.get("/api/v1/ip", (request, response) => {
             response.send({
                 ip: request.ip,
@@ -130,7 +153,32 @@ export class App {
             });
         });
 
-        // Change password (code needs to move to user section)
+        /**
+ * @swagger
+ * /api/v1/user/{id}/cp:
+ *   post:
+ *     summary: Change user password
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password changed
+ *       404:
+ *         description: User not found
+ */
         this.app.post(
             "/api/v1/user/:id/cp",
             async (req: Request, res: Response) => {
@@ -420,7 +468,7 @@ export class App {
         this.app.get(
             "/api/v1/solicitation/process",
             async (req: Request, res: Response) => {
-                return await solicitationService.processSolicitations(req, res);
+                return await solicitationService.processSolicitations();
             }
         );
 
@@ -448,6 +496,29 @@ export class App {
             async (req: Request, res: Response) => {
                 const agencies = await solicitationService.getAgencies();
                 return res.json(agencies);
+            }
+        );
+
+        this.app.get(
+            "/api/v1/solicitation-topic/:id",
+            async (req: Request, res: Response) => {
+                const solicitationTopic = await solicitationService.getSolicitationTopic(
+                    req.params.id
+                );
+                return res.json(solicitationTopic);
+            }
+        );
+
+        this.app.get("/api/v1/solicitation/list-sol-topic", async (req: Request, res: Response) => {
+            const data = await solicitationService.fetchSolicitationData()
+            return res.json(data)
+        });
+
+        this.app.get(
+            "/api/v1/solicitation-topic",
+            async (req: Request, res: Response) => {
+                const solicitationTopics = await solicitationService.getAllSolicitationTopics();
+                return res.json(solicitationTopics);
             }
         );
 
