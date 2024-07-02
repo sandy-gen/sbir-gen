@@ -5,14 +5,14 @@
     "homepage": "https://www.sbir-gen.ai",
     "workspaces": [
         "apps/api",
-        "apps/ui"
+        "apps/frontend"
     ],
     "scripts": {
         "build": "turbo run build",
         "build-force": "turbo run build --force",
         "prettify": "prettier --write .",
         "dev": "turbo run dev --parallel",
-        "start": "cd packages/apps/server/bin && ./run start",
+        "start": "cd apps/api/bin && ./run start",
         "clean": "npm exec -ws -- rimraf dist build",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "test": "turbo run test",
