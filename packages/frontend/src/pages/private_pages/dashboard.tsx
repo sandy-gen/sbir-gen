@@ -7,6 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import MainCard from 'components/MainCard';
 import ReportCard from 'components/cards/statistics/ReportCard';
 import OrdersList from 'sections/dashboard/analytics/OrdersList';
+import TopicTable from 'sections/dashboard/analytics/TopicTable';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -22,7 +23,7 @@ export default function Dashboard() {
         </Grid>
       </Grid>
       <br />
-      <OrdersList />
+      <TopicTable  />
     </MainCard>
   );
 }

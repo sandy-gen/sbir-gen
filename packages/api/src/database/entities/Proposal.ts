@@ -6,21 +6,18 @@ import {
     PrimaryGeneratedColumn,
 } from "typeorm";
 
-import { Topic } from "./Topic";
-import { Solicitation } from "./Solicitation";
-
 @Entity("proposal")
 export class Proposal {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
     @Column({ nullable: true })
-    solicitation: Solicitation
+    solicitationId: string
 
     @Column({ nullable: true })
-    topic: Topic
+    topicId: string
 
-    @Column({ nullable: true })
+    @Column()
     title: string;
 
     @Column({ nullable: true })

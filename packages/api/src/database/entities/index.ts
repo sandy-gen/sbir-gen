@@ -5,6 +5,7 @@ import { Solicitation } from './Solicitation'
 import { User } from './user/User'
 import { UserProfile } from './user/UserProfile'
 import { UserTopic } from './UserTopic'
+import { Proposal } from './Proposal'
 
 export const entities = {
     Company,
@@ -12,5 +13,6 @@ export const entities = {
     UserProfile,
     UserTopic,
     Solicitation,
-    Topic
+    Topic,
+    Proposal
 }
