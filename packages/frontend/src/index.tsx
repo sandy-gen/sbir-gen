@@ -30,15 +30,18 @@ import '@fontsource/public-sans/700.css';
 import App from './App';
 import { ConfigProvider } from 'contexts/ConfigContext';
 import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
 
 // ==============================|| MAIN - REACT DOM RENDER ||============================== //
-
+const queryClient = new QueryClient();
 root.render(
   <ConfigProvider>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </ConfigProvider>
 );
 

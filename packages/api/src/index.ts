@@ -23,6 +23,7 @@ import { sanitizeMiddleware } from './utils/XSS'
 import { generateDeck } from './utils/deck_generator'
 import { UserInputData } from './Interface'
 import { UserAuthenticationRequest } from './dto/UserAuthenticationRequest'
+import { Proposal } from './database/entities/Proposal'
 
 const secretKey = '83477efdhdfhdiseiy'
 
@@ -101,7 +102,7 @@ export class App {
         // Add the sanitizeMiddleware to guard against XSS
         this.app.use(sanitizeMiddleware)
         // this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
-        const whitelistURLs = ['/api/v1/user/uaa/', '/api/v1/ip', '/api/v1/solicitation', '/api/v1/user-topic']
+        const whitelistURLs = ['/api/v1/user/uaa/', '/api/v1/ip', '/api/v1/solicitation', '/api/v1/proposal', '/api/v1/user-topic']
 
         this.app.use((req, res, next) => {
             if (req.url.includes('/api/v1/')) {
@@ -441,6 +442,53 @@ export class App {
         })
 
         // ----------------------------------------
+
+        // CRUD Proposal
+
+        // Create new proposal
+        this.app.post('/api/v1/proposal', async (req: Request, res: Response) => {
+            const body = req.body
+            const newProposal = new Proposal()
+            Object.assign(newProposal, body)
+            const results = await this.AppDataSource.getRepository(Proposal).save(newProposal)
+            return res.json(results)
+        })
+
+        // Update proposal
+        this.app.patch('/api/v1/proposal/:id', async (req: Request, res: Response) => {
+            const body = req.body
+            const id = req.params.id
+            const proposalRepo = this.AppDataSource.getRepository(Proposal)
+            const existingProposal = await proposalRepo.findOneBy({ id })
+            if (!existingProposal) return res.status(404).send(`Proposal with id: ${id} not found`)
+
+            Object.assign(existingProposal, body)
+
+            const results = await proposalRepo.save(existingProposal)
+            return res.json(results)
+        })
+
+        // Get all proposals
+        this.app.get('/api/v1/proposal', async (req: Request, res: Response) => {
+            const results = await this.AppDataSource.getRepository(Proposal).find()
+            return res.json(results)
+        })
+
+        // Get proposal by id
+        this.app.get('/api/v1/proposal/:id', async (req: Request, res: Response) => {
+            const id = req.params.id
+            const results = await this.AppDataSource.getRepository(Proposal).find({ where: { id } })
+            return res.json(results)
+        })
+
+        // Delete proposal by id
+        this.app.delete('/api/v1/proposal/:id', async (req: Request, res: Response) => {
+            const results = await this.AppDataSource.getRepository(Proposal).delete(req.params.id)
+            return res.json(results)
+        })
+
+        
+
 
         // Create endpoint to generate PRD
         this.app.post('/api/v1/generate-prd', async (req: Request, res: Response) => {

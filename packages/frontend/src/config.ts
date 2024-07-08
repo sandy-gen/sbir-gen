@@ -9,7 +9,7 @@ export const linkedInColor = '#0e76a8';
 
 export const APP_DEFAULT_PATH = '/dashboard';
 export const HORIZONTAL_MAX_ITEM = 7;
-export const DRAWER_WIDTH = 260;
+export const DRAWER_WIDTH = 290;
 export const MINI_DRAWER_WIDTH = 60;
 
 export enum SimpleLayoutType {

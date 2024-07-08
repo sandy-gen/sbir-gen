@@ -1,5 +1,5 @@
 // material-ui
-import { FileTextOutlined, DownloadOutlined } from '@ant-design/icons';
+import { FileTextOutlined, DownloadOutlined, DashboardOutlined } from '@ant-design/icons';
 import { Grid } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -16,10 +16,10 @@ export default function Dashboard() {
     <MainCard title="">
       <Grid container spacing={4}>
         <Grid item xs={12} lg={6} sm={6}>
-          <ReportCard primary="68" secondary="Open Topics" color="success.dark" iconPrimary={FileTextOutlined} to='/open-topics' />
+          <ReportCard primary="68" secondary="Open Topics" color="primary.main" iconPrimary={DashboardOutlined} to='/open-topics' />
         </Grid>
         <Grid item xs={12} lg={6} sm={6}>
-          <ReportCard primary="12" secondary="My Topics" color="primary.main" iconPrimary={DownloadOutlined} to='/my-topics' />
+          <ReportCard primary="12" secondary="My Proposals" color="primary.main" iconPrimary={DownloadOutlined} to='/my-proposals' />
         </Grid>
       </Grid>
       <br />

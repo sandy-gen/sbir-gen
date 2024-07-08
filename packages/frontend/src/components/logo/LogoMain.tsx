@@ -24,7 +24,7 @@ export default function LogoMain({ reverse }: { reverse?: boolean }) {
      *
      */
     <>
-      <img src={theme.palette.mode === ThemeMode.DARK ? logoDark : logo} alt="SBIR Gen" width="120"  style={{marginTop: 18}} />
+      <img src={theme.palette.mode === ThemeMode.DARK ? logoDark : logo} alt="SBIR Gen" width="200"  style={{marginTop:38, padding: 2}} />
 
     </>
   );

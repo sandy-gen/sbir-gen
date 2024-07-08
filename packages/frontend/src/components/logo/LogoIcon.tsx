@@ -18,6 +18,6 @@ export default function LogoIcon() {
   const theme = useTheme();
 
   return (
-    <img src={theme.palette.mode === ThemeMode.DARK ? logoIconDark : logoIcon} alt="SBIR Gen" width="100" style={{marginTop: 4}} />
+    <img src={theme.palette.mode === ThemeMode.DARK ? logoIconDark : logoIcon} alt="SBIR Gen" width="300" style={{marginTop: 14}} />
   );
 }

@@ -3,14 +3,14 @@ import Typography from '@mui/material/Typography';
 
 // project import
 import MainCard from 'components/MainCard';
-import OrdersList from 'sections/dashboard/analytics/OrdersList';
+import ProposalComponent from 'sections/proposal/proposal';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-export default function MyTopics() {
+export default function MyProposals() {
   return (
-    <MainCard title="My Topics">
-      <OrdersList />
+    <MainCard title="">
+      <ProposalComponent />
     </MainCard>
   );
 }

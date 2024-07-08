@@ -3,19 +3,14 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import DashboardLayout from 'layout/Dashboard';
-
-import Dashboard from 'pages/private_pages/dashboard';
-import MyTopics from 'pages/private_pages/my-topics';
-import OpenTopics from 'pages/private_pages/open-topics';
-import path from 'path';
-import ProductsPage from 'pages/my-topics/products';
-
-
-// render - sample pageimport Dashboard from '../pages/extra-pages/dashboard';
+import { FormattedMessage } from 'react-intl';
 
 const DashboardPage = Loadable(lazy(() => import('pages/private_pages/dashboard')));
-const MyTopicsPage = Loadable(lazy(() => import('pages/private_pages/my-topics')));
+const MyProposalsPage = Loadable(lazy(() => import('pages/private_pages/my-proposals')));
 const OpenTopicsPage = Loadable(lazy(() => import('pages/private_pages/open-topics')));
+const AwardsPage = Loadable(lazy(() => import('pages/private_pages/awards')));
+const ProductsPage = Loadable(lazy(() => import('pages/my-topics/products')));
+const OpenTopicDetailPage = Loadable(lazy(() => import('pages/private_pages/open-topic-detail')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -28,19 +23,28 @@ const MainRoutes = {
       children: [
         {
           path: '/dashboard',
-          element: <Dashboard />
+          element: <DashboardPage />
         },
         {
           path: '/products',
           element: <ProductsPage />
         },
         {
-          path: '/my-topics',
-          element: <MyTopics />,
+          path: '/my-proposals',
+          element: <MyProposalsPage />,
+        },
+        {
+          path: '/awards',
+          element: <AwardsPage />,
         },
         {
           path: '/open-topics',
-          element: <OpenTopics />,
+          element: <OpenTopicsPage />,
+        },
+        {
+          path: '/open-topic-detail',
+          title: <FormattedMessage id="Open Topic Detail" />,
+          element: <OpenTopicDetailPage />,
         },
       ]
     },

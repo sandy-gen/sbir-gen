@@ -1,15 +1,16 @@
 // material-ui
+import Typography from '@mui/material/Typography';
 
 // project import
 import MainCard from 'components/MainCard';
-import TopicTable from 'sections/dashboard/analytics/TopicTable';
+
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-export default function OpenTopics() {
+export default function OpenTopicDetail() {
   return (
     <MainCard title="">
-      <TopicTable />
+      ...
     </MainCard>
   );
 }
