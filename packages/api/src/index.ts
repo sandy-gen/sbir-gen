@@ -348,6 +348,14 @@ export class App {
          * Solicitation API
          ************************************************************************/
         const solicitationService = new SolicitationService(this.AppDataSource)
+
+        // Ger solicitation topics from solicitation service getSolicitationTopics
+        this.app.get('/api/v1/solicitation/solicitation-topics', async (req:Request, res: Response) => {
+            const solicitations = await solicitationService.getSolicitationTopics(req, res)
+            return res.json(solicitations)
+        })
+
+
         // Get solicitations from API
         this.app.get('/api/v1/solicitation/retrieve', async (req: Request, res: Response) => {
             return await solicitationService.getAllSolicitations(req, res)

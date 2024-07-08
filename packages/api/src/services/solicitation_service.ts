@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import { Solicitation } from '../database/entities/Solicitation'
 import { Topic } from '../database/entities/Topic'
+import { classToPlain, instanceToPlain } from 'class-transformer'
+import { SolicitationTopic } from '../dto/SolicitationTopic'
 
 const solicitationTopicData = [
     {
@@ -65,8 +67,11 @@ export class SolicitationService {
         const savedSolicitations: any[] = []
         data?.forEach((solicitation: any, i: number) => {
             counter++
-            console.log('Saving solicitation')
             const newSolicitation = this.solicitationRepo.create(solicitation)
+            newSolicitation.topics = solicitation.solicitation_topics.map((topic: any) => {
+                const newTopic = this.topicRepo.create(topic)
+                return newTopic
+            })
             this.solicitationRepo.save(newSolicitation)
             savedSolicitations.push(newSolicitation)
         })
@@ -126,18 +131,59 @@ export class SolicitationService {
     }
 
     async getSolicitationTopic(id: string) {
-        // Get a solicitation
-        const topic = await this.topicRepo.findOne(id)
-        const solicitation = await this.solicitationRepo.findOne(id)
-
-        const solicitationTopic = {
-            id: solicitation.id,
-            solicitation: solicitation,
-            topic: topic
-        }
-        return solicitationTopic
+        // Get a solicitation topic
+        const solicitation = await this.solicitationRepo.createQueryBuilder('solicitation')
+            .innerJoinAndSelect('solicitation.topics', 'topic')
+            .where('solicitation.id = :id', { id: id })
+            .getOne()
+        return solicitation
     }
 
+
+    async getSolicitationTopics(req: Request, res: Response) {
+        try {
+
+            const solicitations = await this.solicitationRepo.createQueryBuilder('solicitation')
+            .leftJoinAndSelect('solicitation.topics', 'topic')
+            .select([
+                'solicitation.id',
+                'solicitation.solicitation_title',
+                'solicitation.solicitation_number',
+                'solicitation.open_date',
+                'solicitation.close_date',
+                'topic.id',
+                'topic.topic_title',
+                'topic.topic_description',
+                'topic.branch'
+            ])
+            .orderBy('solicitation.id', 'ASC')
+            .getMany();
+
+        // Serialize the solicitations using classToPlain to ensure no circular references
+        const serializedSolicitations = instanceToPlain(solicitations);
+
+        // Flatten the structure
+        const flattenedData = serializedSolicitations.flatMap((solicitation: { topics: any[]; id: any; solicitation_title: any; solicitation_number: any; open_date: any; close_date: any }) => 
+            solicitation.topics.map(topic => new SolicitationTopic({
+                solicitation_id: solicitation.id,
+                solicitation_title: solicitation.solicitation_title,
+                solicitation_number: solicitation.solicitation_number,
+                open_date: solicitation.open_date,
+                close_date: solicitation.close_date,
+                topic_id: topic.id,
+                topic_title: topic.topic_title,
+                topic_description: topic.topic_description,
+                topic_branch: topic.branch,
+            }))
+        );
+        
+        // Return the flattened data
+        return flattenedData;
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: 'An error occurred while fetching solicitations with topics.' });
+        }
+    }
     async getAllSolicitations(req: Request, res: Response) {
         // Get all solicitations
         const solicitations = await this.solicitationRepo.find()

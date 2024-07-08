@@ -7,6 +7,7 @@ import {
     OneToMany,
 } from "typeorm";
 import { Topic } from "./Topic";
+import { Type } from "class-transformer";
 
 
 @Entity("solicitation")
@@ -56,8 +57,9 @@ export class Solicitation {
     @Column({ nullable: true })
     current_status: string;
 
-    @OneToMany(() => Topic, (topic: Topic) => topic.id) // One Solicitation can have multiple Topics
-    topic: Topic[];
+    @OneToMany(() => Topic, (topic: Topic) => topic.solicitation, { cascade: true })
+    @Type(() => Topic)
+    topics: Topic[];
 
     @Column({ default: false })
     isDeleted: boolean;

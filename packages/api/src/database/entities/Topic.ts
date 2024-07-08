@@ -1,6 +1,6 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
 import { Solicitation } from './Solicitation'
-
+import { Exclude } from 'class-transformer';
 
 @Entity('topic')
 export class Topic {
@@ -9,6 +9,10 @@ export class Topic {
 
     @Column({ nullable: true })
     solicitationId: string
+
+    @ManyToOne(() => Solicitation, (solicitation: Solicitation) => solicitation.topics)
+    @Exclude()
+    solicitation: Solicitation;
 
     @Column({ nullable: true })
     topic_title: string
