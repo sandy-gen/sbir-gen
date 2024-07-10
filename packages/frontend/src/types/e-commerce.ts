@@ -50,6 +50,31 @@ export type Reviews = {
   };
 };
 
+export type Topics = {
+  id: string | number;
+  title: string;
+  number: string;
+  product_req_doc: string;
+  tech_spec: string;
+  proposal: string;
+  phase: string;
+  presentation: string;
+  status: string;
+  isDeleted: boolean;
+  createdDate: Date;
+  updatedDate: Date;
+  createdBy: string;
+  updatedBy: string;
+};
+
+export type TopicsFilter = {
+  length?: number;
+  search: string;
+  sort: string;
+  phase: string[];
+  status: string[];
+};
+
 // product shop filter
 export type ProductsFilter = {
   length?: number;

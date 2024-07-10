@@ -14,16 +14,16 @@ import { ThemeMode } from 'config';
 import useConfig from 'hooks/useConfig';
 
 // types
-import { ProductsFilter } from 'types/e-commerce';
+import { TopicsFilter } from 'types/e-commerce';
 
 // ==============================|| PRODUCT - FILTER DRAWER ||============================== //
 
 interface FilterDrawerProps {
-  filter: ProductsFilter;
-  initialState: ProductsFilter;
+  filter: TopicsFilter;
+  initialState: TopicsFilter;
   handleDrawerOpen: () => void;
   openFilterDrawer: boolean | undefined;
-  setFilter: (filter: ProductsFilter) => void;
+  setFilter: (filter: TopicsFilter) => void;
   setLoading: (flag: boolean) => void;
 }
 
@@ -42,59 +42,29 @@ export default function ProductFilterDrawer({
   const matchLG = useMediaQuery(theme.breakpoints.only('lg'));
   const drawerBG = mode === ThemeMode.DARK ? 'dark.main' : 'white';
 
-  const filterIsEqual = (a1: ProductsFilter, a2: ProductsFilter) =>
+  const filterIsEqual = (a1: TopicsFilter, a2: TopicsFilter) =>
     a1 === a2 ||
     (a1.length === a2.length &&
       a1.search === a2.search &&
       a1.sort === a2.sort &&
-      a1.price === a2.price &&
-      a1.rating === a2.rating &&
-      JSON.stringify(a1.gender) === JSON.stringify(a2.gender) &&
-      JSON.stringify(a1.categories) === JSON.stringify(a2.categories) &&
-      JSON.stringify(a1.colors) === JSON.stringify(a2.colors));
+      JSON.stringify(a1.phase) === JSON.stringify(a2.phase));
+      // a1.price === a2.price &&
+      // a1.rating === a2.rating &&
+      // JSON.stringify(a1.gender) === JSON.stringify(a2.gender) &&
+      // JSON.stringify(a1.categories) === JSON.stringify(a2.categories) &&
+      // JSON.stringify(a1.colors) === JSON.stringify(a2.colors));
 
   const handelFilter = (type: string, params: string, rating?: number) => {
     setLoading(true);
     switch (type) {
-      case 'gender':
-        if (filter.gender.some((item) => item === params)) {
-          setFilter({ ...filter, gender: filter.gender.filter((item) => item !== params) });
+      case 'phase':
+        if (filter.phase.some((item) => item === params)) {
+          setFilter({ ...filter, phase: filter.phase.filter((item) => item !== params) });
         } else {
-          setFilter({ ...filter, gender: [...filter.gender, params] });
+          setFilter({ ...filter, phase: [...filter.phase, params] });
         }
         break;
-      case 'categories':
-        if (filter.categories.some((item) => item === params)) {
-          setFilter({ ...filter, categories: filter.categories.filter((item) => item !== params) });
-        } else if (filter.categories.some((item) => item === 'all') || params === 'all') {
-          setFilter({ ...filter, categories: [params] });
-        } else {
-          setFilter({ ...filter, categories: [...filter.categories, params] });
-        }
-
-        break;
-      case 'colors':
-        if (filter.colors.some((item) => item === params)) {
-          setFilter({ ...filter, colors: filter.colors.filter((item) => item !== params) });
-        } else {
-          setFilter({ ...filter, colors: [...filter.colors, params] });
-        }
-        break;
-      case 'price':
-        setFilter({ ...filter, price: params });
-        break;
-      case 'search':
-        setFilter({ ...filter, search: params });
-        break;
-      case 'sort':
-        setFilter({ ...filter, sort: params });
-        break;
-      case 'rating':
-        setFilter({ ...filter, rating: rating! });
-        break;
-      case 'reset':
-        setFilter(initialState);
-        break;
+      
       default:
       // no options
     }

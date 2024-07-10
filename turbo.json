@@ -5,9 +5,13 @@
           "dependsOn": ["^build"],
           "outputs": ["dist/**"]
       },
-      "test": {},
+      "start": {
+        "dependsOn": ["^build"],
+        "cache": false
+      },
       "dev": {
-          "cache": false
+        "cache": false,
+        "parallel": true
       }
   }
 }

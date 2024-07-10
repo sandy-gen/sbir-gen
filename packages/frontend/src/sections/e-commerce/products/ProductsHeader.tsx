@@ -89,7 +89,7 @@ export default function ProductsHeader({ filter, handleDrawerOpen, setFilter }: 
               )
             }}
             value={filter.search}
-            placeholder="Search Product"
+            placeholder="Search Topics"
             size="medium"
             onChange={handleSearch}
           />

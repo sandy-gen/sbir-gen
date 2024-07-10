@@ -125,14 +125,14 @@ export default function ProductsPage() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <ProductFilterDrawer
+      {/* <ProductFilterDrawer
         filter={filter}
         setFilter={setFilter}
         openFilterDrawer={openFilterDrawer}
         handleDrawerOpen={handleDrawerOpen}
         setLoading={setLoading}
         initialState={initialState}
-      />
+      /> */}
       <Main theme={theme} open={openFilterDrawer} container={container}>
         <Grid container spacing={2.5}>
           <Grid item xs={12}>

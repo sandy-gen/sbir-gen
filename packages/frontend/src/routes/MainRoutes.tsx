@@ -4,6 +4,8 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import DashboardLayout from 'layout/Dashboard';
 import { FormattedMessage } from 'react-intl';
+import path from 'path';
+import { title } from 'process';
 
 const DashboardPage = Loadable(lazy(() => import('pages/private_pages/dashboard')));
 const MyProposalsPage = Loadable(lazy(() => import('pages/private_pages/my-proposals')));
@@ -11,6 +13,7 @@ const OpenTopicsPage = Loadable(lazy(() => import('pages/private_pages/open-topi
 const AwardsPage = Loadable(lazy(() => import('pages/private_pages/awards')));
 const ProductsPage = Loadable(lazy(() => import('pages/my-topics/products')));
 const OpenTopicDetailPage = Loadable(lazy(() => import('pages/private_pages/open-topic-detail')));
+const SandboxPage = Loadable(lazy(() => import('pages/private_pages/sandbox')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -46,6 +49,11 @@ const MainRoutes = {
           title: <FormattedMessage id="Open Topic Detail" />,
           element: <OpenTopicDetailPage />,
         },
+        {
+          path: '/sandbox',
+          title: <FormattedMessage id="Sandbox" />,
+          element: <SandboxPage />,
+        }
       ]
     },
 

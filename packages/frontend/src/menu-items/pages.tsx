@@ -36,13 +36,13 @@ const pages: NavItemType = {
       url: '/open-topics',
       icon: icons.FolderOpenOutlined
     },
-    {
-      id: 'open-topic-detail',
-      title: <FormattedMessage id="Open Topic Detail" />,
-      type: 'item',
-      url: '/open-topic-detail',
-      icon: icons.FolderOpenOutlined,
-    },
+    // {
+    //   id: 'open-topic-detail',
+    //   title: <FormattedMessage id="Open Topic Detail" />,
+    //   type: 'item',
+    //   url: '/open-topic-detail',
+    //   icon: icons.FolderOpenOutlined,
+    // },
     {
       id: 'my-proposals',
       title: <FormattedMessage id="My Proposals" />,
@@ -57,7 +57,15 @@ const pages: NavItemType = {
       type: 'item',
       url: '/awards',
       icon: icons.TrophyOutlined
-    }
+    },
+    {
+      id: 'products',
+      title: <FormattedMessage id="Topics" />,
+      type: 'item',
+      url: '/products',
+      icon: icons.FileOutlined
+    },
+    
   ]
 };
 

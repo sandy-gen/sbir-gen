@@ -48,7 +48,7 @@ export default function ProductEmpty({ handelFilter }: ProductEmptyProps) {
         <Grid item>
           <Stack spacing={0.5}>
             <Typography variant={matchDownMD ? 'h3' : 'h1'} color="inherit">
-              There is no Product
+              There are no Topics
             </Typography>
             <Typography variant="h5" color="text.secondary">
               Try checking your spelling or use more general terms

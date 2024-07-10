@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 // types
-import { ProductsFilter } from 'types/e-commerce';
+import { ProductsFilter, TopicsFilter } from 'types/e-commerce';
 
 // project imports
 import ColorOptions from './ColorOptions';
@@ -24,14 +24,14 @@ function getColor(color: string) {
 
 // ==============================|| PRODUCT GRID - FILTER VIEW ||============================== //
 
-interface ProductFilterViewProps {
-  filter: ProductsFilter;
-  initialState: ProductsFilter;
-  filterIsEqual: (initialState: ProductsFilter, filter: ProductsFilter) => boolean;
+interface TopicsFilterViewProps {
+  filter: TopicsFilter;
+  initialState: TopicsFilter;
+  filterIsEqual: (initialState: TopicsFilter, filter: TopicsFilter) => boolean;
   handelFilter: (type: string, params: string, rating?: number) => void;
 }
 
-export default function ProductFilterView({ filter, filterIsEqual, handelFilter, initialState }: ProductFilterViewProps) {
+export default function ProductFilterView({ filter, filterIsEqual, handelFilter, initialState }: TopicsFilterViewProps) {
   const theme = useTheme();
   const matchDownMD = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -93,12 +93,12 @@ export default function ProductFilterView({ filter, filterIsEqual, handelFilter,
               </Stack>
             </Grid>
           )}
-          {!(JSON.stringify(initialState.gender) === JSON.stringify(filter.gender)) && (
+          {!(JSON.stringify(initialState.phase) === JSON.stringify(filter.phase)) && (
             <Grid item>
               <Stack>
-                <Typography variant="subtitle1">Gender</Typography>
+                <Typography variant="subtitle1">Phase</Typography>
                 <Grid container item sx={{ ml: '-10px' }}>
-                  {filter.gender.map((item: string, index: number) => (
+                  {filter.phase.map((item: string, index: number) => (
                     <Stack direction="row" alignItems="center" key={index}>
                       <Chip
                         size={matchDownMD ? 'small' : undefined}
@@ -115,129 +115,12 @@ export default function ProductFilterView({ filter, filterIsEqual, handelFilter,
                         color="secondary"
                         size="small"
                         sx={{ '&:hover': { bgcolor: 'transparent' }, ml: -1.5 }}
-                        onClick={() => handelFilter('gender', item)}
+                        onClick={() => handelFilter('phase', item)}
                       >
                         <CloseOutlined />
                       </IconButton>
                     </Stack>
                   ))}
-                </Grid>
-              </Stack>
-            </Grid>
-          )}
-          {!(JSON.stringify(initialState.categories) === JSON.stringify(filter.categories)) && filter.categories.length > 0 && (
-            <Grid item>
-              <Stack>
-                <Typography variant="subtitle1">Categories</Typography>
-                <Grid container item sx={{ ml: '-10px' }}>
-                  {filter.categories.map((item: string, index: number) => (
-                    <Stack direction="row" alignItems="center" key={index}>
-                      <Chip
-                        size={matchDownMD ? 'small' : undefined}
-                        label={item}
-                        sx={{
-                          borderRadius: '4px',
-                          textTransform: 'capitalize',
-                          color: `grey.500`,
-                          bgcolor: 'inherit',
-                          '& .MuiSvgIcon-root': { color: `grey` }
-                        }}
-                      />
-                      <IconButton
-                        color="secondary"
-                        size="small"
-                        sx={{ '&:hover': { bgcolor: 'transparent' }, ml: -1.5 }}
-                        onClick={() => handelFilter('categories', item)}
-                      >
-                        <CloseOutlined />
-                      </IconButton>
-                    </Stack>
-                  ))}
-                </Grid>
-              </Stack>
-            </Grid>
-          )}
-          {!(JSON.stringify(initialState.colors) === JSON.stringify(filter.colors)) && (
-            <Grid item>
-              <Stack>
-                <Typography variant="subtitle1">Colors</Typography>
-                <Grid container item sx={{ ml: '-10px' }}>
-                  {filter.colors.map((item: string, index: number) => {
-                    const colorsData = getColor(item);
-                    return (
-                      <Stack direction="row" alignItems="center" key={index}>
-                        <Chip
-                          size={matchDownMD ? 'small' : undefined}
-                          label={colorsData[0].label}
-                          sx={{
-                            borderRadius: '4px',
-                            textTransform: 'capitalize',
-                            color: `grey.500`,
-                            bgcolor: 'inherit',
-                            '& .MuiSvgIcon-root': { color: `grey` }
-                          }}
-                        />
-                        <IconButton
-                          color="secondary"
-                          size="small"
-                          sx={{ '&:hover': { bgcolor: 'transparent' }, ml: -1.5 }}
-                          onClick={() => handelFilter('colors', item)}
-                        >
-                          <CloseOutlined />
-                        </IconButton>
-                      </Stack>
-                    );
-                  })}
-                </Grid>
-              </Stack>
-            </Grid>
-          )}
-          {!(initialState.price === filter.price) && (
-            <Grid item>
-              <Stack>
-                <Typography variant="subtitle1">Price</Typography>
-                <Grid item sx={{ ml: '-10px' }}>
-                  <Chip
-                    size={matchDownMD ? 'small' : undefined}
-                    label={filter.price}
-                    sx={{
-                      borderRadius: '4px',
-                      textTransform: 'capitalize',
-                      color: `grey.500`,
-                      bgcolor: 'inherit',
-                      '& .MuiSvgIcon-root': { color: `grey` }
-                    }}
-                  />
-                </Grid>
-              </Stack>
-            </Grid>
-          )}
-          {!(initialState.rating === filter.rating) && (
-            <Grid item>
-              <Stack>
-                <Typography variant="subtitle1">Rating</Typography>
-                <Grid item sx={{ ml: '-10px' }}>
-                  <Stack direction="row" alignItems="center">
-                    <Chip
-                      size={matchDownMD ? 'small' : undefined}
-                      label={String(filter.rating)}
-                      sx={{
-                        borderRadius: '4px',
-                        textTransform: 'capitalize',
-                        color: `grey.500`,
-                        bgcolor: 'inherit',
-                        '& .MuiSvgIcon-root': { color: `grey` }
-                      }}
-                    />
-                    <IconButton
-                      color="secondary"
-                      size="small"
-                      sx={{ '&:hover': { bgcolor: 'transparent' }, ml: -1.5 }}
-                      onClick={() => handelFilter('rating', '', 0)}
-                    >
-                      <CloseOutlined />
-                    </IconButton>
-                  </Stack>
                 </Grid>
               </Stack>
             </Grid>

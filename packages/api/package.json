@@ -21,7 +21,7 @@
     "scripts": {
         "build": "tsc",
         "start": "cd bin && ./run start",
-        "dev": "concurrently \"yarn watch\" \"nodemon",
+        "dev": "concurrently \"yarn watch\" nodemon ",
         "oclif-dev": "cd bin && ./dev start",
         "postpack": "shx rm -f oclif.manifest.json",
         "prepack": "yarn build && oclif manifest && oclif readme",
@@ -64,6 +64,7 @@
         "pptxgenjs": "^3.12.0",
         "reflect-metadata": "^0.1.13",
         "sanitize-html": "^2.11.0",
+        "sbir-gen-ui": "*",
         "socket.io": "^4.6.1",
         "sqlite3": "^5.1.6",
         "typeorm": "^0.3.6",
